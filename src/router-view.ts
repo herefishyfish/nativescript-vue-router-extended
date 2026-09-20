@@ -18,20 +18,22 @@ const RouterView = {
   setup(props) {
     const globalProperties =
       getCurrentInstance()?.appContext?.config?.globalProperties;
-    const defaultRoute = globalProperties.$router.getRoute(props.defaultRoute);
-    if (!defaultRoute) {
+    const initialRoute =
+      globalProperties.$router.getCurrentRoute() ||
+      globalProperties.$router.getRoute(props.defaultRoute);
+    if (!initialRoute) {
       throw new Error(
         `No registered route at path "${props.defaultRoute}" found on current router`
       );
     }
-    globalProperties.$router.setCurrentRoute(defaultRoute);
+    globalProperties.$router.setCurrentRoute(initialRoute);
     return () => {
       return h(
         "Frame",
         {
           id: props.id,
         },
-        [h(defaultRoute.component, { props: props.defaultRouteProps })]
+        [h(initialRoute.component, { props: props.defaultRouteProps })]
       );
     };
   },
