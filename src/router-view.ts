@@ -1,4 +1,5 @@
 import { getCurrentInstance, h } from "vue";
+import type { RouterService } from "./router-service";
 
 const RouterView = {
   props: {
@@ -18,15 +19,15 @@ const RouterView = {
   setup(props) {
     const globalProperties =
       getCurrentInstance()?.appContext?.config?.globalProperties;
+    const router = globalProperties.$router as unknown as RouterService;
     const initialRoute =
-      globalProperties.$router.getCurrentRoute() ||
-      globalProperties.$router.getRoute(props.defaultRoute);
+      router.getCurrentRoute() || router.getRoute(props.defaultRoute);
     if (!initialRoute) {
       throw new Error(
         `No registered route at path "${props.defaultRoute}" found on current router`
       );
     }
-    globalProperties.$router.setCurrentRoute(initialRoute);
+    router.setCurrentRoute(initialRoute);
     return () => {
       return h(
         "Frame",

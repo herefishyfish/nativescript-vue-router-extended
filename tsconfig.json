@@ -4,6 +4,8 @@
     "target": "ES2017",
     "module": "esnext",
     "moduleResolution": "node",
+    "strict": false,
+    "ignoreDeprecations": "6.0",
     "outDir": "dist",
     "sourceMap": true,
     "declaration": true,
@@ -24,5 +26,5 @@
     "noFallthroughCasesInSwitch": true,
     "lib": ["es2017", "dom"]
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
