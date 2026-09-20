@@ -30,7 +30,8 @@
     "url": "https://github.com/ammarahm-ed/nativescript-vue-router-extended/issues"
   },
   "scripts": {
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "prepare": "npm run build"
   },
   "license": "Apache-2.0",
   "homepage": "https://github.com/ammarahm-ed/nativescript-vue-router-extended",
